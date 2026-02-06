@@ -1,0 +1,2018 @@
+[
+    {
+        "id": "80234b088d030941",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9178d308c38122cb",
+        "type": "mqtt in",
+        "z": "80234b088d030941",
+        "name": "rfid",
+        "topic": "home/alarmsystem/sensors/rfid",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "15c1eeb517c3ab5b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1730,
+        "y": 100,
+        "wires": [
+            [
+                "rfid_sql_query",
+                "934c4cd94030d2a3",
+                "c2cfe9d71809d89f",
+                "31542f8eaeeffc36"
+            ]
+        ]
+    },
+    {
+        "id": "3d6251fed7ad64d9",
+        "type": "mqtt in",
+        "z": "80234b088d030941",
+        "name": "open door",
+        "topic": "home/alarmsystem/sensors/opendoor",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "15c1eeb517c3ab5b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 1180,
+        "wires": [
+            [
+                "38630fa56b66e80d",
+                "79f0321de904e21f",
+                "3e64d8e4c3f990dd"
+            ]
+        ]
+    },
+    {
+        "id": "4f7035dac176dd3e",
+        "type": "mqtt in",
+        "z": "80234b088d030941",
+        "name": "motion ",
+        "topic": "home/alarmsystem/sensors/PIR",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "15c1eeb517c3ab5b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1700,
+        "y": 640,
+        "wires": [
+            [
+                "5035b175471dfd3b",
+                "f055d5c768a21877",
+                "3464d50d1b75e1ea",
+                "9cc452fb20873cdb"
+            ]
+        ]
+    },
+    {
+        "id": "d564f9310592809a",
+        "type": "inject",
+        "z": "80234b088d030941",
+        "name": "dummy rfid : valid",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "home/alarmsystem/sensors/rfid",
+        "payload": "A3C4F1B7",
+        "payloadType": "str",
+        "x": 1960,
+        "y": 120,
+        "wires": [
+            [
+                "934c4cd94030d2a3",
+                "c2cfe9d71809d89f",
+                "31542f8eaeeffc36",
+                "rfid_sql_query"
+            ]
+        ]
+    },
+    {
+        "id": "416db6c40408342a",
+        "type": "ui_text",
+        "z": "80234b088d030941",
+        "group": "a7ec73027658c5df",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "rfid display",
+        "label": "RFID : ",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 2540,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "37c0eab6886da8a4",
+        "type": "ui_text",
+        "z": "80234b088d030941",
+        "group": "edc4f5f6542d14b7",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "status display ",
+        "label": "status : ",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 910,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "320764944cc5a5f4",
+        "type": "mqtt in",
+        "z": "80234b088d030941",
+        "name": "status",
+        "topic": "home/alarmsystem/system/status",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "15c1eeb517c3ab5b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 270,
+        "y": 340,
+        "wires": [
+            [
+                "4e31165ec9b70c7c",
+                "1d3f19aa36a1046b",
+                "109b462785d27803",
+                "85562d99b7eb57ae",
+                "b60cb053e4ab7cb4",
+                "b5ccd1660ee84a45",
+                "5e39eb77841afc13",
+                "955ec06b5d03c564",
+                "7b745b478b605996"
+            ]
+        ]
+    },
+    {
+        "id": "1a2d44c454f0478a",
+        "type": "inject",
+        "z": "80234b088d030941",
+        "name": "init status",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "home/alarmsystem/system/status",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 130,
+        "y": 240,
+        "wires": [
+            [
+                "3cfd94d71d42201a",
+                "4e31165ec9b70c7c"
+            ]
+        ]
+    },
+    {
+        "id": "4e31165ec9b70c7c",
+        "type": "change",
+        "z": "80234b088d030941",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "0",
+                "fromt": "num",
+                "to": "DISARMED",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "1",
+                "fromt": "num",
+                "to": "ARMED",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "2",
+                "fromt": "num",
+                "to": "INTRUSION",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 340,
+        "wires": [
+            [
+                "37c0eab6886da8a4"
+            ]
+        ]
+    },
+    {
+        "id": "0837efefa19bdfaa",
+        "type": "inject",
+        "z": "80234b088d030941",
+        "name": "dummy clear",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "home/alarmsystem/sensors/rfid",
+        "payload": "CLEAR",
+        "payloadType": "str",
+        "x": 1980,
+        "y": 80,
+        "wires": [
+            [
+                "416db6c40408342a"
+            ]
+        ]
+    },
+    {
+        "id": "934c4cd94030d2a3",
+        "type": "trigger",
+        "z": "80234b088d030941",
+        "name": "BASE VAL",
+        "op1": "",
+        "op2": "CLEAR",
+        "op1type": "pay",
+        "op2type": "str",
+        "duration": "3",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 2350,
+        "y": 100,
+        "wires": [
+            [
+                "416db6c40408342a"
+            ]
+        ]
+    },
+    {
+        "id": "a7b1778cbef3fdfa",
+        "type": "ui_chart",
+        "z": "80234b088d030941",
+        "name": "detected",
+        "group": "0c37bf93551a2630",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "past detections ",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "1.2",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 2180,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "65cd122fc9f2ba97",
+        "type": "inject",
+        "z": "80234b088d030941",
+        "name": "dummy motion",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "home/alarmsystem/sensors/PIR",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 1660,
+        "y": 760,
+        "wires": [
+            [
+                "f055d5c768a21877",
+                "5035b175471dfd3b",
+                "3464d50d1b75e1ea",
+                "9cc452fb20873cdb"
+            ]
+        ]
+    },
+    {
+        "id": "99fe85bd5a5135ed",
+        "type": "ui_led",
+        "z": "80234b088d030941",
+        "order": 1,
+        "group": "0c37bf93551a2630",
+        "width": 0,
+        "height": 0,
+        "label": "! motion !",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "1",
+                "valueType": "num"
+            },
+            {
+                "color": "#008000",
+                "value": "0",
+                "valueType": "num"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 2200,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "f055d5c768a21877",
+        "type": "trigger",
+        "z": "80234b088d030941",
+        "name": "void",
+        "op1": "",
+        "op2": "0",
+        "op1type": "pay",
+        "op2type": "str",
+        "duration": "1000",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 2000,
+        "y": 740,
+        "wires": [
+            [
+                "99fe85bd5a5135ed"
+            ]
+        ]
+    },
+    {
+        "id": "b9e7c3a0c5ff35db",
+        "type": "inject",
+        "z": "80234b088d030941",
+        "name": "door closed",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "home/alarmsystem/sensors/opendoor",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 330,
+        "y": 1160,
+        "wires": [
+            [
+                "38630fa56b66e80d",
+                "79f0321de904e21f",
+                "3e64d8e4c3f990dd"
+            ]
+        ]
+    },
+    {
+        "id": "c6a17c82e2e9a8db",
+        "type": "inject",
+        "z": "80234b088d030941",
+        "name": "door opened",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "home/alarmsystem/sensors/opendoor",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 320,
+        "y": 1200,
+        "wires": [
+            [
+                "38630fa56b66e80d",
+                "79f0321de904e21f",
+                "3e64d8e4c3f990dd"
+            ]
+        ]
+    },
+    {
+        "id": "38630fa56b66e80d",
+        "type": "ui_led",
+        "z": "80234b088d030941",
+        "order": 2,
+        "group": "de989401a4eb0161",
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#008000",
+                "value": "1",
+                "valueType": "num"
+            },
+            {
+                "color": "#ff0000",
+                "value": "0",
+                "valueType": "num"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "door led",
+        "x": 570,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "a25a5aae6fff6c30",
+        "type": "ui_text",
+        "z": "80234b088d030941",
+        "group": "de989401a4eb0161",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "status display ",
+        "label": "status : ",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 800,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "79f0321de904e21f",
+        "type": "change",
+        "z": "80234b088d030941",
+        "name": "int to O/C",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "0",
+                "fromt": "num",
+                "to": "opened",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "1",
+                "fromt": "num",
+                "to": "closed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 570,
+        "y": 1200,
+        "wires": [
+            [
+                "a25a5aae6fff6c30",
+                "55b37d273f2cae51"
+            ]
+        ]
+    },
+    {
+        "id": "1d3f19aa36a1046b",
+        "type": "ui_switch",
+        "z": "80234b088d030941",
+        "name": "toggle arming",
+        "label": "ACTIVATION",
+        "tooltip": "",
+        "group": "edc4f5f6542d14b7",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "home/alarmsystem/system/status",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "num",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "num",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 650,
+        "y": 440,
+        "wires": [
+            [
+                "49dfbebd68933cc9"
+            ]
+        ]
+    },
+    {
+        "id": "f8515b5f18834cdd",
+        "type": "mqtt out",
+        "z": "80234b088d030941",
+        "name": "status manual ",
+        "topic": "home/alarmsystem/system/status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "15c1eeb517c3ab5b",
+        "x": 1170,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "528cc108219ee2ed",
+        "type": "inject",
+        "z": "80234b088d030941",
+        "name": "CHART RESET",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[]",
+        "payloadType": "json",
+        "x": 2010,
+        "y": 620,
+        "wires": [
+            [
+                "a7b1778cbef3fdfa"
+            ]
+        ]
+    },
+    {
+        "id": "5035b175471dfd3b",
+        "type": "trigger",
+        "z": "80234b088d030941",
+        "name": "pulsing",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "1",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 2010,
+        "y": 680,
+        "wires": [
+            [
+                "a7b1778cbef3fdfa"
+            ]
+        ]
+    },
+    {
+        "id": "3464d50d1b75e1ea",
+        "type": "function",
+        "z": "80234b088d030941",
+        "name": "motion log",
+        "func": "\n//var now = new Date();\n//var triggered = now.toISOString().replace('T', ' ').substring(0, 19);\n\n\nmsg.topic = \"INSERT INTO logevents (triggered, sensor) VALUES (NOW(), :sens)\";\n\nvar data = {\n    //trig: triggered,  //date\n    sens: 'PIR'      //quel capteur      \n};\n\nmsg.payload = data;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2000,
+        "y": 800,
+        "wires": [
+            [
+                "e4d75a5e615028c0"
+            ]
+        ]
+    },
+    {
+        "id": "55b37d273f2cae51",
+        "type": "function",
+        "z": "80234b088d030941",
+        "name": "door status log",
+        "func": "\n//var now = new Date();\n//var triggered = now.toISOString().replace('T', ' ').substring(0, 19);\n\n\n\nmsg.topic = \"INSERT INTO logevents (triggered, sensor, sensor_value) VALUES (NOW(), :sens, :sens_value)\";\n\nvar data = {\n  //  trig: triggered,  //date\n    sens: 'doorcheck',      //quel capteur      \n    sens_value: msg.payload\n};\n\nmsg.payload = data;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 1240,
+        "wires": [
+            [
+                "39164d625012e1f4"
+            ]
+        ]
+    },
+    {
+        "id": "02d84a64f85e619e",
+        "type": "debug",
+        "z": "80234b088d030941",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1520,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "c2cfe9d71809d89f",
+        "type": "function",
+        "z": "80234b088d030941",
+        "name": "rfid checking",
+        "func": "\nvar key = msg.payload;\n\nmsg.topic = \"SELECT * FROM users WHERE rfidkey = :rfidkey\";\n\nmsg.payload = {\n    rfidkey:key\n    };\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2350,
+        "y": 160,
+        "wires": [
+            [
+                "6e895370dd730b3d"
+            ]
+        ]
+    },
+    {
+        "id": "6e895370dd730b3d",
+        "type": "Stackhero-MySQL",
+        "z": "80234b088d030941",
+        "server": "2382baaf0d5fd964",
+        "name": "xampp",
+        "x": 2590,
+        "y": 160,
+        "wires": [
+            [
+                "424053cd52f6a55f"
+            ]
+        ]
+    },
+    {
+        "id": "424053cd52f6a55f",
+        "type": "switch",
+        "z": "80234b088d030941",
+        "name": "rfid outcome",
+        "property": "payload.length",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 1,
+        "x": 2800,
+        "y": 120,
+        "wires": [
+            [
+                "0ee12f2d6571da39",
+                "43d1123277f1e7ea"
+            ]
+        ]
+    },
+    {
+        "id": "81f30184883b6158",
+        "type": "mqtt out",
+        "z": "80234b088d030941",
+        "name": "valid tag = disarm",
+        "topic": "home/alarmsystem/system/status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "15c1eeb517c3ab5b",
+        "x": 3210,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "0ee12f2d6571da39",
+        "type": "change",
+        "z": "80234b088d030941",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2990,
+        "y": 120,
+        "wires": [
+            [
+                "81f30184883b6158"
+            ]
+        ]
+    },
+    {
+        "id": "31542f8eaeeffc36",
+        "type": "function",
+        "z": "80234b088d030941",
+        "name": "rfid status log",
+        "func": "\n//var now = new Date();\n//var triggered = now.toISOString().replace('T', ' ').substring(0, 19);\n\n\nmsg.topic = \"INSERT INTO logevents (triggered, sensor, sensor_value) VALUES (NOW(), :sens, :sens_value)\";\n\nvar data = {\n  //  trig: triggered,  //date\n    sens: 'rfid',      //quel capteur      \n    sens_value: msg.payload\n};\n\nmsg.payload = data;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2360,
+        "y": 220,
+        "wires": [
+            [
+                "7d0a90a8c6348342"
+            ]
+        ]
+    },
+    {
+        "id": "7d0a90a8c6348342",
+        "type": "Stackhero-MySQL",
+        "z": "80234b088d030941",
+        "server": "2382baaf0d5fd964",
+        "name": "xampp",
+        "x": 2580,
+        "y": 220,
+        "wires": [
+            [
+                "02d84a64f85e619e"
+            ]
+        ]
+    },
+    {
+        "id": "3e64d8e4c3f990dd",
+        "type": "change",
+        "z": "80234b088d030941",
+        "name": "global : door status",
+        "rules": [
+            {
+                "t": "set",
+                "p": "doorstatus",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 1300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "49dfbebd68933cc9",
+        "type": "switch",
+        "z": "80234b088d030941",
+        "name": "door check",
+        "property": "doorstatus",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 920,
+        "y": 440,
+        "wires": [
+            [
+                "f8515b5f18834cdd",
+                "e390226e5061b39b"
+            ],
+            [
+                "9e936822ebb08f69"
+            ]
+        ]
+    },
+    {
+        "id": "9e936822ebb08f69",
+        "type": "change",
+        "z": "80234b088d030941",
+        "name": "reboot button",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 500,
+        "wires": [
+            [
+                "1d3f19aa36a1046b"
+            ]
+        ]
+    },
+    {
+        "id": "e390226e5061b39b",
+        "type": "function",
+        "z": "80234b088d030941",
+        "name": "system status update : user",
+        "func": "\n//var now = new Date();\n//var triggered = now.toISOString().replace('T', ' ').substring(0, 19);\n\n\nmsg.topic = \"INSERT INTO statusgen (at_time,status, source) VALUES (NOW(), :status, :source)\";\n\nvar data = {\n  //  trig: triggered,  //date\n    status: String(msg.payload),      //quel status\n    source: 'user'  //qui / quoi \n};\n\nmsg.payload = data;\n\nreturn msg; ",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1220,
+        "y": 400,
+        "wires": [
+            [
+                "9a68f1958acbce5d"
+            ]
+        ]
+    },
+    {
+        "id": "9a68f1958acbce5d",
+        "type": "Stackhero-MySQL",
+        "z": "80234b088d030941",
+        "server": "2382baaf0d5fd964",
+        "name": "xampp",
+        "x": 1440,
+        "y": 400,
+        "wires": [
+            [
+                "02d84a64f85e619e"
+            ]
+        ]
+    },
+    {
+        "id": "3cfd94d71d42201a",
+        "type": "mqtt out",
+        "z": "80234b088d030941",
+        "name": "kickstart status",
+        "topic": "home/alarmsystem/system/status",
+        "qos": "",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "15c1eeb517c3ab5b",
+        "x": 360,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "7c87382453c40776",
+        "type": "inject",
+        "z": "80234b088d030941",
+        "name": "init button",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "home/alarmsystem/system/status",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 230,
+        "y": 440,
+        "wires": [
+            [
+                "1d3f19aa36a1046b"
+            ]
+        ]
+    },
+    {
+        "id": "b06c5eec0757b375",
+        "type": "Stackhero-MySQL",
+        "z": "80234b088d030941",
+        "server": "2382baaf0d5fd964",
+        "name": "xampp",
+        "x": 2210,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2e2467e24c246402",
+        "type": "function",
+        "z": "80234b088d030941",
+        "name": "new user form",
+        "func": "\nvar username = msg.payload.username;\nvar rfidkey = msg.payload.rfidkey;\n\n\nmsg.topic = \"INSERT INTO users (name,rfidkey) VALUES (:un, :rfidk)\";\n\nvar data = {\n    un: username,\n    rfidk: rfidkey //nom\n};\n\nmsg.payload = data;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2020,
+        "y": 500,
+        "wires": [
+            [
+                "b06c5eec0757b375"
+            ]
+        ]
+    },
+    {
+        "id": "7b5f5b18b143d0f2",
+        "type": "ui_form",
+        "z": "80234b088d030941",
+        "name": "user add ",
+        "label": "NEW USER :",
+        "group": "a7ec73027658c5df",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "name",
+                "value": "username",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "RFID key",
+                "value": "rfidkey",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "username": "",
+            "rfidkey": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 1820,
+        "y": 500,
+        "wires": [
+            [
+                "2e2467e24c246402"
+            ]
+        ]
+    },
+    {
+        "id": "43d1123277f1e7ea",
+        "type": "function",
+        "z": "80234b088d030941",
+        "name": "system status update : rfid",
+        "func": "\n//var now = new Date();\n//var triggered = now.toISOString().replace('T', ' ').substring(0, 19);\n\n\nmsg.topic = \"INSERT INTO statusgen (at_time, status, source) VALUES (NOW(), :status, :source)\";\n\nvar data = {\n//    t: triggered,  //date\n    status: '0',      \n    source: 'rfid'\n};\n\nmsg.payload = data;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3060,
+        "y": 220,
+        "wires": [
+            [
+                "5399aace68f9e040"
+            ]
+        ]
+    },
+    {
+        "id": "5399aace68f9e040",
+        "type": "Stackhero-MySQL",
+        "z": "80234b088d030941",
+        "server": "2382baaf0d5fd964",
+        "name": "xampp",
+        "x": 3340,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e4d75a5e615028c0",
+        "type": "Stackhero-MySQL",
+        "z": "80234b088d030941",
+        "server": "2382baaf0d5fd964",
+        "name": "xampp",
+        "x": 2210,
+        "y": 800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2b02c30dec3fe133",
+        "type": "inject",
+        "z": "80234b088d030941",
+        "name": "dummy rfid : invalid",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "home/alarmsystem/sensors/rfid",
+        "payload": "A3C4F134",
+        "payloadType": "str",
+        "x": 1970,
+        "y": 160,
+        "wires": [
+            [
+                "31542f8eaeeffc36",
+                "c2cfe9d71809d89f",
+                "934c4cd94030d2a3",
+                "rfid_sql_query"
+            ]
+        ]
+    },
+    {
+        "id": "9cc452fb20873cdb",
+        "type": "switch",
+        "z": "80234b088d030941",
+        "name": "armed system ?",
+        "property": "systemstatus",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 2010,
+        "y": 900,
+        "wires": [
+            [
+                "783c2559dbeb4012"
+            ]
+        ]
+    },
+    {
+        "id": "109b462785d27803",
+        "type": "change",
+        "z": "80234b088d030941",
+        "name": "global : system status ",
+        "rules": [
+            {
+                "t": "set",
+                "p": "systemstatus",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7208373c9a1a77e7",
+        "type": "mqtt out",
+        "z": "80234b088d030941",
+        "name": "lock",
+        "topic": "home/alarmsystem/actuators/lock",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "15c1eeb517c3ab5b",
+        "x": 830,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "0c6cb5252887a596",
+        "type": "comment",
+        "z": "80234b088d030941",
+        "name": "LOCK",
+        "info": "si le système est armé alors la porte est fermé \nstatus = 1 -> lock = 1 : on verrouille la porte\n\nstatus = 2 -> lock = 1 : la porte est déjà verrouillée \n\nstatus = 0 -> lock = 0 : on déverrouille quand le système est éteint",
+        "x": 650,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "da37ab5fef2b95dc",
+        "type": "mqtt out",
+        "z": "80234b088d030941",
+        "name": "alarm",
+        "topic": "home/alarmsystem/actuators/buzz",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "15c1eeb517c3ab5b",
+        "x": 830,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "85562d99b7eb57ae",
+        "type": "change",
+        "z": "80234b088d030941",
+        "name": "ring y/n",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "1",
+                "fromt": "num",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "2",
+                "fromt": "num",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 820,
+        "wires": [
+            [
+                "da37ab5fef2b95dc",
+                "fefc36d9b484f040"
+            ]
+        ]
+    },
+    {
+        "id": "92418b4d83cdc639",
+        "type": "comment",
+        "z": "80234b088d030941",
+        "name": "ALARM",
+        "info": "l'alarme sonne uniquement quand le système est en mode 2 (triggered)\n",
+        "x": 650,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "b60cb053e4ab7cb4",
+        "type": "mqtt out",
+        "z": "80234b088d030941",
+        "name": "server status led",
+        "topic": "home/alarmsystem/actuators/led",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "15c1eeb517c3ab5b",
+        "x": 690,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "988107bd2cca4eba",
+        "type": "comment",
+        "z": "80234b088d030941",
+        "name": "LED",
+        "info": "0 : system désactivé ; led éteinte\n1 : système armé ; pattern lent \n2 : système déclenché ; pattern rapide",
+        "x": 470,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "7b745b478b605996",
+        "type": "mqtt out",
+        "z": "80234b088d030941",
+        "name": "screen",
+        "topic": "home/alarmsystem/actuators/screen",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "15c1eeb517c3ab5b",
+        "x": 860,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "b5ccd1660ee84a45",
+        "type": "change",
+        "z": "80234b088d030941",
+        "name": "message",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "0",
+                "fromt": "num",
+                "to": "désarmé",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "1",
+                "fromt": "num",
+                "to": "armé",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "2",
+                "fromt": "num",
+                "to": "INTRUSION",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 1060,
+        "wires": [
+            [
+                "0f41e94987da7cce"
+            ]
+        ]
+    },
+    {
+        "id": "37dd00e630098013",
+        "type": "mqtt out",
+        "z": "80234b088d030941",
+        "name": "! RING !",
+        "topic": "home/alarmsystem/system/status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "15c1eeb517c3ab5b",
+        "x": 2410,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "783c2559dbeb4012",
+        "type": "change",
+        "z": "80234b088d030941",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "2",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2210,
+        "y": 900,
+        "wires": [
+            [
+                "37dd00e630098013",
+                "9e875d7d1bb78fe5"
+            ]
+        ]
+    },
+    {
+        "id": "39164d625012e1f4",
+        "type": "Stackhero-MySQL",
+        "z": "80234b088d030941",
+        "server": "2382baaf0d5fd964",
+        "name": "xampp",
+        "x": 990,
+        "y": 1240,
+        "wires": [
+            [
+                "02d84a64f85e619e"
+            ]
+        ]
+    },
+    {
+        "id": "5e39eb77841afc13",
+        "type": "ui_led",
+        "z": "80234b088d030941",
+        "order": 2,
+        "group": "edc4f5f6542d14b7",
+        "width": 0,
+        "height": 0,
+        "label": "status led",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "2",
+                "valueType": "num"
+            },
+            {
+                "color": "#008000",
+                "value": "1",
+                "valueType": "num"
+            },
+            {
+                "color": "#808080",
+                "value": "0",
+                "valueType": "num"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "status led",
+        "x": 610,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "a7d0311a15ba5e4e",
+        "type": "comment",
+        "z": "80234b088d030941",
+        "name": "SCREEN",
+        "info": "affiche des messages en fonction du status",
+        "x": 650,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "54f27e2949638fc9",
+        "type": "change",
+        "z": "80234b088d030941",
+        "name": "lock log logic",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "0",
+                "fromt": "num",
+                "to": "unlocked",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "1",
+                "fromt": "num",
+                "to": "locked",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 880,
+        "y": 620,
+        "wires": [
+            [
+                "742aa2bae4164086",
+                "9f585d5222d04fe5"
+            ]
+        ]
+    },
+    {
+        "id": "742aa2bae4164086",
+        "type": "function",
+        "z": "80234b088d030941",
+        "name": "lock log",
+        "func": "\n//var now = new Date();\n//var triggered = now.toISOString().replace('T', ' ').substring(0, 19);\n\n\nmsg.topic = \"INSERT INTO logactions (triggered, actuator, command) VALUES (NOW(), :act, :com)\";\n\nvar data = {\n    //trig: triggered,  //date\n    act: 'lock'   ,   //quel actionneur\n    com: msg.payload\n};\n\nmsg.payload = data;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1070,
+        "y": 620,
+        "wires": [
+            [
+                "44946ee20852a562"
+            ]
+        ]
+    },
+    {
+        "id": "955ec06b5d03c564",
+        "type": "change",
+        "z": "80234b088d030941",
+        "name": "lock logic",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "2",
+                "fromt": "num",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 680,
+        "wires": [
+            [
+                "54f27e2949638fc9",
+                "7208373c9a1a77e7",
+                "89b09e315738d897"
+            ]
+        ]
+    },
+    {
+        "id": "44946ee20852a562",
+        "type": "Stackhero-MySQL",
+        "z": "80234b088d030941",
+        "server": "2382baaf0d5fd964",
+        "name": "xampp",
+        "x": 1230,
+        "y": 620,
+        "wires": [
+            [
+                "02d84a64f85e619e"
+            ]
+        ]
+    },
+    {
+        "id": "fefc36d9b484f040",
+        "type": "change",
+        "z": "80234b088d030941",
+        "name": "buzzer log logic",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "0",
+                "fromt": "num",
+                "to": "silent",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "1",
+                "fromt": "num",
+                "to": "triggered",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 880,
+        "y": 880,
+        "wires": [
+            [
+                "dd1d0820e6d6778c"
+            ]
+        ]
+    },
+    {
+        "id": "dd1d0820e6d6778c",
+        "type": "function",
+        "z": "80234b088d030941",
+        "name": "buzzer log",
+        "func": "\n//var now = new Date();\n//var triggered = now.toISOString().replace('T', ' ').substring(0, 19);\n\n\nmsg.topic = \"INSERT INTO logactions (triggered, actuator, command) VALUES (NOW(), :act, :com)\";\n\nvar data = {\n    //trig: triggered,  //date\n    act: 'buzz'   ,   //quel actionneur\n    com: msg.payload\n};\n\nmsg.payload = data;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 880,
+        "wires": [
+            [
+                "3b252dd53ae94f44"
+            ]
+        ]
+    },
+    {
+        "id": "3b252dd53ae94f44",
+        "type": "Stackhero-MySQL",
+        "z": "80234b088d030941",
+        "server": "2382baaf0d5fd964",
+        "name": "xampp",
+        "x": 1230,
+        "y": 880,
+        "wires": [
+            [
+                "02d84a64f85e619e"
+            ]
+        ]
+    },
+    {
+        "id": "0f41e94987da7cce",
+        "type": "function",
+        "z": "80234b088d030941",
+        "name": "screen log",
+        "func": "\n//var now = new Date();\n//var triggered = now.toISOString().replace('T', ' ').substring(0, 19);\n\n\nmsg.topic = \"INSERT INTO logactions (triggered, actuator, command) VALUES (NOW(), :act, :com)\";\n\nvar data = {\n    //trig: triggered,  //date\n    act: 'screen'   ,   //quel actionneur\n    com: msg.payload\n};\n\nmsg.payload = data;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 1100,
+        "wires": [
+            [
+                "c597394d88ed95fb"
+            ]
+        ]
+    },
+    {
+        "id": "c597394d88ed95fb",
+        "type": "Stackhero-MySQL",
+        "z": "80234b088d030941",
+        "server": "2382baaf0d5fd964",
+        "name": "xampp",
+        "x": 1010,
+        "y": 1100,
+        "wires": [
+            [
+                "02d84a64f85e619e"
+            ]
+        ]
+    },
+    {
+        "id": "9f585d5222d04fe5",
+        "type": "ui_text",
+        "z": "80234b088d030941",
+        "group": "de989401a4eb0161",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "lock display",
+        "label": "security : ",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1090,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "89b09e315738d897",
+        "type": "ui_led",
+        "z": "80234b088d030941",
+        "order": 4,
+        "group": "de989401a4eb0161",
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#008000",
+                "value": "1",
+                "valueType": "num"
+            },
+            {
+                "color": "#ff0000",
+                "value": "0",
+                "valueType": "num"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": false,
+        "name": "lock led",
+        "x": 850,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "9e875d7d1bb78fe5",
+        "type": "function",
+        "z": "80234b088d030941",
+        "name": "system status INTRUSION ",
+        "func": "\n//var now = new Date();\n//var triggered = now.toISOString().replace('T', ' ').substring(0, 19);\n\n\nmsg.topic = \"INSERT INTO statusgen (at_time,status, source) VALUES (NOW(), :status, :source)\";\n\nvar data = {\n    //trig: triggered,  //date\n    status: String(msg.payload),      //quel status\n    source: 'user'  //qui / quoi \n};\n\nmsg.payload = data;\n\nreturn msg; ",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2450,
+        "y": 980,
+        "wires": [
+            [
+                "f17bc43dad6963e8"
+            ]
+        ]
+    },
+    {
+        "id": "f17bc43dad6963e8",
+        "type": "Stackhero-MySQL",
+        "z": "80234b088d030941",
+        "server": "2382baaf0d5fd964",
+        "name": "xampp",
+        "x": 2690,
+        "y": 980,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "rfid_sql_query",
+        "type": "function",
+        "z": "80234b088d030941",
+        "name": "Query Last 5 RFIDs",
+        "func": "msg.topic = `\nSELECT \n    DATE_FORMAT(logevents.triggered, '%T') as Time, \n    logevents.sensor_value as RFID,\n    CASE \n        WHEN users.name IS NOT NULL THEN CONCAT('VALID (', users.name,')')\n        ELSE 'INVALID'\n    END as Status\nFROM logevents\nLEFT JOIN users ON logevents.sensor_value = users.rfidkey\nWHERE logevents.sensor = 'rfid'\nORDER BY logevents.triggered DESC\nLIMIT 5;`;\n\n\nmsg.payload = {};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1970,
+        "y": 300,
+        "wires": [
+            [
+                "rfid_db_execute"
+            ]
+        ]
+    },
+    {
+        "id": "rfid_db_execute",
+        "type": "Stackhero-MySQL",
+        "z": "80234b088d030941",
+        "server": "2382baaf0d5fd964",
+        "name": "xampp",
+        "x": 2170,
+        "y": 300,
+        "wires": [
+            [
+                "rfid_html_table",
+                "02d84a64f85e619e"
+            ]
+        ]
+    },
+    {
+        "id": "rfid_html_table",
+        "type": "ui_template",
+        "z": "80234b088d030941",
+        "group": "a7ec73027658c5df",
+        "name": "HTML Table",
+        "order": 3,
+        "width": 6,
+        "height": 4,
+        "format": "<style>\n    table {\n        width: 100%;\n        border-collapse: collapse;\n        font-size: 14px;\n    }\n    th {\n        text-align: left;\n        border-bottom: 2px solid #666;\n        padding: 5px;\n        color: #888;\n    }\n    td {\n        padding: 5px;\n        border-bottom: 1px solid #444;\n    }\n    .valid {\n        color: #4CAF50; /* Green */\n        font-weight: bold;\n    }\n    .invalid {\n        color: #F44336; /* Red */\n        font-weight: bold;\n    }\n</style>\n\n<table>\n    <thead>\n        <tr>\n            <th>Time</th>\n            <th>Key</th>\n            <th>Status</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr ng-repeat=\"row in msg.payload\">\n            <td>{{row.Time}}</td>\n            <td>{{row.RFID}}</td>\n            <td ng-class=\"{\n                'valid': row.Status.indexOf('VALID') !== -1 && row.Status.indexOf('INVALID') === -1,\n                'invalid': row.Status.indexOf('INVALID') !== -1\n            }\">\n                {{row.Status}}\n            </td>\n        </tr>\n    </tbody>\n</table>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 2350,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "15c1eeb517c3ab5b",
+        "type": "mqtt-broker",
+        "name": "broke(r)-ass",
+        "broker": "mqtt.ci-ciad.utbm.fr",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "a7ec73027658c5df",
+        "type": "ui_group",
+        "name": "RFID",
+        "tab": "e3bbbd0d98c456fb",
+        "order": 2,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "edc4f5f6542d14b7",
+        "type": "ui_group",
+        "name": "HOME",
+        "tab": "e3bbbd0d98c456fb",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "0c37bf93551a2630",
+        "type": "ui_group",
+        "name": "MOTION DETECTION ",
+        "tab": "e3bbbd0d98c456fb",
+        "order": 3,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "de989401a4eb0161",
+        "type": "ui_group",
+        "name": "DOOR STATUS",
+        "tab": "e3bbbd0d98c456fb",
+        "order": 4,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2382baaf0d5fd964",
+        "type": "Stackhero-MySQL-Server",
+        "name": "Goonbase",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "tls": false,
+        "database": "HOMEALARM"
+    },
+    {
+        "id": "e3bbbd0d98c456fb",
+        "type": "ui_tab",
+        "name": "Gooncave",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "fe78a9941a3f9e8c",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6",
+            "node-red-contrib-ui-led": "0.4.11",
+            "node-red-contrib-stackhero-mysql": "1.0.5"
+        }
+    }
+]
